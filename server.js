@@ -5,6 +5,8 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+app.use(express.static('public'))
+
 app.post('/api/items', (req, res) => {
   console.log(req.body)
   res.sendStatus(200)
