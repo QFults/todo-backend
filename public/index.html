@@ -7,23 +7,36 @@
   <title>Document</title>
 </head>
 <body>
+  <form>
+    <p>
+      <label for="text">Item</label>
+      <input type="text" name="text" id="text">
+    </p>
+    <button id="addItem">Add Item</button>
+  </form>
   
   <script>
 
-    const item = {
-      text: 'Take out trash',
-      isDone: false
-    }
+    document.getElementById('addItem').addEventListener('click', event => {
+      event.preventDefault()
 
-    fetch('/api/items', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(item)
+      const item = {
+        text: document.getElementById('text').value,
+        isDone: false
+      }
+
+      fetch('/api/items', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
+      })
+        .then(() => alert('Item created!'))
+        .catch(err => console.error(err))
     })
-      .then(() => alert('Item created!'))
-      .catch(err => console.error(err))
+
+
 
   </script>
 </body>
